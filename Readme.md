@@ -23,3 +23,4 @@ Chương trình điểm danh bằng khuôn mặt bằng opencv
 6. Gửi email
 
 dua len github
+chinh lai bao cao
