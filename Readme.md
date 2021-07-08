@@ -21,6 +21,3 @@ Chương trình điểm danh bằng khuôn mặt bằng opencv
 -làm việc với thư viện thời gian
 
 6. Gửi email
-
-dua len github
-chinh lai bao cao
