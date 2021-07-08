@@ -5,7 +5,7 @@ from PIL import Image
 
 # code huan luyen mo hinh
 recognizer = cv2.face_LBPHFaceRecognizer.create()
-path = 'data_face'
+path = 'face_img'
 
 def getImagesWithID(path):
     imagePaths=[os.path.join(path, f) for f in os.listdir(path)]
@@ -26,6 +26,6 @@ recognizer.train(faces, Ids)
 
 if not os.path.exists('HuanLuyen'):
     os.makedirs('HuanLuyen')
-    
+
 recognizer.save("HuanLuyen/huanluyen.yml")
 cv2.destroyAllWindows()

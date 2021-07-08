@@ -73,7 +73,7 @@ def add_sinh_vien():
     
     # chup hinh
     # print
-    face_cascade = cv2.CascadeClassifier('khuonMat.xml')
+    face_cascade = cv2.CascadeClassifier('haar.xml')
     cap = cv2.VideoCapture(0)
     sample_number = 0
 
@@ -84,10 +84,10 @@ def add_sinh_vien():
         for (x,y,w,h) in faces:
             sample_number += 1
 
-            if not os.path.exists('data_face'):
-                os.makedirs('data_face')
+            if not os.path.exists('face_img'):
+                os.makedirs('face_img')
 
-            cv2.imwrite('data_face/User.'+str(masv_entry.get())+"."+str(sample_number)+".jpg",  img[y:y+h,x:x+w])
+            cv2.imwrite('face_img/User.'+str(masv_entry.get())+"."+str(sample_number)+".jpg",  img[y:y+h,x:x+w])
             cv2.rectangle(img, (x,y), (x+w, y+h), (0,255,0), 2)
 
         cv2.imshow('img', img)

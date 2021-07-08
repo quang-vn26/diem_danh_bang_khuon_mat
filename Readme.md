@@ -20,6 +20,8 @@ Chương trình điểm danh bằng khuôn mặt bằng opencv
 -danh sách sinh viên trong buổi học
 -làm việc với thư viện thời gian
 
+-xu ly sinh vien vang mat
+
 (6. Gửi email)
 
 ![image-20210613223321082](image-20210613223321082.png)

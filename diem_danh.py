@@ -12,7 +12,7 @@ import csv
 # Các chức năng chính
 vang =0
 def nhan_dien(monhoc=''):
-    face_cascade = cv2.CascadeClassifier('khuonMat.xml')
+    face_cascade = cv2.CascadeClassifier('haar.xml')
     recognizer = cv2.face_LBPHFaceRecognizer.create()
     recognizer.read("HuanLuyen/huanluyen.yml")
 
@@ -38,11 +38,13 @@ def nhan_dien(monhoc=''):
     # tao file
     now = datetime.now()
     ten_file =now.strftime('%d_%m_%Y') 
-    tao_file = open(thu_muc_mon_hoc+"/"+ten_file+".csv", "w")
     # ghi header
-    with open(thu_muc_mon_hoc+"/"+ten_file+".csv", "w") as f:
-        f.writelines(f'\nma_sv,ten,email,time')
-
+    try:
+        with open(thu_muc_mon_hoc+"/"+ten_file+".csv", "x") as f:
+            f.writelines(f'\nma_sv,ten,email,time')
+    except Exception as e:
+        print(e)
+        
     # doc file va ghi danh sach sinh vien co mat
     def ghi_file_diem_danh(masv,name,email,vang=0):
         open_file = thu_muc_mon_hoc+"/"+ten_file+".csv"
@@ -104,7 +106,7 @@ def nhan_dien(monhoc=''):
                     cv2.putText(img, "MSV:"+masv_string+",Name: "+ten_string, (x+10, y), font, 1, (0,255,0), 1);
                     ghi_file_diem_danh(masv_string,ten_string,email_string)
             else:
-                cv2.putText(img, "Unknown", (x, y + h + 30), font, 0.4, (0, 255, 0), 1);
+                cv2.putText(img, "Unknown", (x, y + h + 30), font, 0.4, (255,0, 0), 1);
         cv2.imshow('img', img)
         if(cv2.waitKey(1) == ord('q')):
             break
