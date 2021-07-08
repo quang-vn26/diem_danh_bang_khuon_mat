@@ -3,8 +3,7 @@ import cv2
 import numpy as np
 from PIL import Image
 
-# CODE TRAINING (HUAN LUYEN) HINH ANH NHAN DIEN
-#recognizer = cv2.face.LBPHFaceRecognizer_create()
+# code huan luyen mo hinh
 recognizer = cv2.face_LBPHFaceRecognizer.create()
 path = 'data_face'
 
@@ -25,9 +24,8 @@ def getImagesWithID(path):
 Ids, faces = getImagesWithID(path)
 recognizer.train(faces, Ids)
 
-if not os.path.exists('trainer'):
-    os.makedirs('trainer')
-
-recognizer.save("trainer/face-trainner.yml")
-#recognizer.save("huanluyen/huanluyen.yml")
+if not os.path.exists('HuanLuyen'):
+    os.makedirs('HuanLuyen')
+    
+recognizer.save("HuanLuyen/huanluyen.yml")
 cv2.destroyAllWindows()

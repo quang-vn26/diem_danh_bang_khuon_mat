@@ -9,57 +9,55 @@ import cv2
 from datetime import datetime
 import csv
 
-# import giaodien
-
 # Các chức năng chính
 vang =0
 def nhan_dien(monhoc=''):
     face_cascade = cv2.CascadeClassifier('khuonMat.xml')
-    #recognizer = cv2.face.LBPHFaceRecognizer_create()
     recognizer = cv2.face_LBPHFaceRecognizer.create()
-    #recognizer.read("huanluyen/huanluyen.yml")
-    recognizer.read("trainer/face-trainner.yml")
+    recognizer.read("HuanLuyen/huanluyen.yml")
 
     def getProfile(Id):
         conn=sqlite3.connect("mydata.db")
         query="SELECT * FROM sinh_vien WHERE masv="+str(Id)
+
         if vang==1:
             query = "SELECT * FROM sinh_vien WHERE masv NOT LIKE"+str(Id)
+
         cursor=conn.execute(query)
         profile=None
+
         for row in cursor:
             profile=row
         conn.close()
         return profile
     # Tao thu muc luu file
-    thuc_muc_mon_hoc = "Mon_Hoc/"+str(monhoc)
-    if not os.path.exists(thuc_muc_mon_hoc):
-        os.makedirs(thuc_muc_mon_hoc)
+    thu_muc_mon_hoc = "Mon_Hoc/"+str(monhoc)
+    if not os.path.exists(thu_muc_mon_hoc):
+        os.makedirs(thu_muc_mon_hoc)
     
     # tao file
     now = datetime.now()
     ten_file =now.strftime('%d_%m_%Y') 
-    tao_file = open(thuc_muc_mon_hoc+"/"+ten_file+".csv", "w") 
+    tao_file = open(thu_muc_mon_hoc+"/"+ten_file+".csv", "w")
+    # ghi header
+    with open(thu_muc_mon_hoc+"/"+ten_file+".csv", "w") as f:
+        f.writelines(f'\nma_sv,ten,email,time')
 
     # doc file va ghi danh sach sinh vien co mat
     def ghi_file_diem_danh(masv,name,email,vang=0):
-        open_file = thuc_muc_mon_hoc+"/"+ten_file+".csv"
+        open_file = thu_muc_mon_hoc+"/"+ten_file+".csv"
         if vang == 1:
-            open_file = thuc_muc_mon_hoc+"/"+ten_file+"_vang.csv"
+            open_file = thu_muc_mon_hoc+"/"+ten_file+"_vang.csv"
         # xu ly ghi file
-        # myDict = {'masv':masv,'ten':ten,'email':email,'time':time}
         with open(open_file,'r+') as f:
             myDataList = f.readlines()
             masvList = []
-            for line in myDataList:
+            for line in myDataList[1:]:
                 entry = line.split(',')
                 masvList.append(entry[0])
-            # masvList = []    
             if masv not in masvList:
                 now = datetime.now()
                 dtString = now.strftime('%H:%M:%S')
-                # csv.DictWriter(f,fieldnames=['masv','ten','email','time'])
-                # writer.writerow(myDict)
                 f.writelines(f'\n{masv},{name},{email},{dtString}')
 
     def danh_sach_vang():
@@ -69,7 +67,7 @@ def nhan_dien(monhoc=''):
         profile=None
         for row in cursor:
             profile=row
-            with open(thuc_muc_mon_hoc+"/"+ten_file+".csv") as f:
+            with open(thu_muc_mon_hoc+"/"+ten_file+".csv") as f:
                 reader = csv.DictReader(f, delimiter=',')
                 for row2 in reader:
                     print(row2)
@@ -84,13 +82,9 @@ def nhan_dien(monhoc=''):
                       
  
     # Ham insert csdl mon hoc
-
-
-    #cap = cv2.VideoCapture("rtsp://admin:admin@172.16.1.45:554/cam/realmonitor?channel=1&subtype=1&unicast=true&proto=Onvif")
     cap = cv2.VideoCapture(0)
     font = cv2.FONT_HERSHEY_COMPLEX
     while True:
-        #comment the next line and make sure the image being read is names img when using imread
         ret, img = cap.read()
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
         faces = face_cascade.detectMultiScale(gray, 1.3, 5)
@@ -142,7 +136,6 @@ def bang_dieu_khien():
 # Code giao dien
 master = tkinter.Tk()
 master.geometry("390x350")
-# print('chay di')
 
 master.title("ĐIỂM DANH THEO MÔN HỌC")
 width = 515
@@ -155,15 +148,13 @@ y = (screen_height/2) - (height/2)
 master.geometry("%dx%d+%d+%d" % (width, height, x, y))
 master.resizable(0, 0)
 
-
 bg_color = "#263D42"
 fg_color = "white"
 master.configure(background= bg_color)
 
-#---heading image
 photo = ImageTk.PhotoImage(Image.open("logo.png"))
 tkinter.Label(master, image=photo).grid(rowspan = 3, columnspan = 5, row =0,column = 0)
-# --------button
+
 tkinter.Button(master, text="Đồ án",borderwidth=3, relief='ridge', fg=fg_color, bg=bg_color, width = 45, command = do_an).grid(row = 8,  padx=(50, 0), pady=(20, 10))
 tkinter.Button(master, text="Xử lý ảnh",borderwidth=3, relief='ridge', fg=fg_color, bg=bg_color, width = 45, command = xu_ly_anh).grid(row = 9,  padx=(50, 0), pady=(20, 10))
 tkinter.Button(master, text="Trình biên dịch",borderwidth=3, relief='ridge', fg=fg_color, bg=bg_color, width = 45, command = trinh_bien_dich).grid(row = 10,  padx=(50, 0), pady=(20, 10))

@@ -20,7 +20,7 @@ Chương trình điểm danh bằng khuôn mặt bằng opencv
 -danh sách sinh viên trong buổi học
 -làm việc với thư viện thời gian
 
-6. Gửi email
+(6. Gửi email)
 
-dua len github
-chinh lai bao cao
+![image-20210613223321082](image-20210613223321082.png)
+

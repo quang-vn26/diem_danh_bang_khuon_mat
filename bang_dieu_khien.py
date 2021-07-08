@@ -2,12 +2,9 @@ import tkinter
 from PIL import ImageTk, Image
 from tkinter.messagebox import showinfo,showerror
 import sqlite3
-# import giaodien
-
 
 master = tkinter.Tk()
 master.geometry("390x350")
-# print('chay di')
 
 master.title("HỆ THỐNG ĐIỂM DANH BẰNG KHUÔN MẶT")
 width = 515
@@ -45,10 +42,9 @@ bg_color = "#263D42"
 fg_color = "white"
 master.configure(background= bg_color)
 
-#---heading image
 photo = ImageTk.PhotoImage(Image.open("logo.png"))
 tkinter.Label(master, image=photo).grid(rowspan = 3, columnspan = 5, row =0,column = 0)
-# --------button
+#button
 tkinter.Button(master, text="Dữ liệu",borderwidth=3, relief='ridge', fg=fg_color, bg=bg_color, width = 45, command = lay_du_lieu).grid(row = 8,  padx=(50, 0), pady=(20, 10))
 tkinter.Button(master, text="Đào tạo mô hình",borderwidth=3, relief='ridge', fg=fg_color, bg=bg_color, width = 45, command = dao_tao).grid(row = 9,  padx=(50, 0), pady=(20, 10))
 tkinter.Button(master, text="Điểm danh",borderwidth=3, relief='ridge', fg=fg_color, bg=bg_color, width = 45, command = diem_danh).grid(row = 10,  padx=(50, 0), pady=(20, 10))
