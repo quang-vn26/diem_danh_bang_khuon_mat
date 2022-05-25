@@ -39,12 +39,9 @@ def nhan_dien(monhoc=''):
     now = datetime.now()
     ten_file =now.strftime('%d_%m_%Y') 
     # ghi header
-    try:
-        with open(thu_muc_mon_hoc+"/"+ten_file+".csv", "x") as f:
-            f.writelines(f'\nma_sv,ten,email,time')
-    except Exception as e:
-        print(e)
-        
+    with open(thu_muc_mon_hoc+"/"+ten_file+".csv", "w") as f:
+        f.writelines(f'\nma_sv,ten,email,time')
+
     # doc file va ghi danh sach sinh vien co mat
     def ghi_file_diem_danh(masv,name,email,vang=0):
         open_file = thu_muc_mon_hoc+"/"+ten_file+".csv"

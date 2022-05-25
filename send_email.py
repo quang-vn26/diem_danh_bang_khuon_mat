@@ -4,14 +4,11 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
 root = Tk()
-root.geometry('500x660')
-root.title("Giữ Email cho sinh viên")
+root.geometry('600x660')
+root.title("Giữi Email cho sinh viên")
 
 Label_0 = Label(root, text="Đăng nhập tài khoản", width=20, fg="green", font=("bold", 20))
 Label_0.place(x=90, y=33)
-
-Label_1 = Label(root, text="Tài khoản Email :", width=20, font=("bold", 10))
-Label_1.place(x=40, y=110)
 #######################################
 # nhập đầu vào
 Rmail = StringVar()
@@ -20,13 +17,18 @@ Rsender = StringVar()
 Rsubject = StringVar()
 #######################################
 
+Label_1 = Label(root, text="Tài khoản Email :", width=20, font=("bold", 10))
+Label_1.place(x=40, y=110)
+
 emailE = Entry(root, width=40, textvariable=Rmail)
+emailE.insert(0,'nttam.18it5@sict.udn.vn')
 emailE.place(x=200, y=110)
 
 Label_2 = Label(root, text="Mật khẩu:", width=20, font=("bold", 10))
 Label_2.place(x=40, y=160)
 
 passwordE = Entry(root, width=40, show="*", textvariable=Rpswrd)
+passwordE.insert(0,'nguyentrongtam2468')
 passwordE.place(x=200, y=160)
 
 compose = Label(root, text="Người nhận ", width=20, font=("bold", 15))
@@ -42,6 +44,7 @@ Label_4 = Label(root, text="Chủ để:", width=20, font=("bold", 10))
 Label_4.place(x=40, y=310)
 
 subjectE = Entry(root, width=40, textvariable=Rsubject)
+subjectE.insert(0,'Hệ thống điểm danh khuôn mặt')
 subjectE.place(x=200, y=310)
 
 Label_5 = Label(root, text="Nội dung:", width=20, font=("bold", 10))
@@ -54,17 +57,8 @@ msgbodyE.place(x=200, y=360)
 
 
 def sendemail():
-    # print(str(Rmail.get()))
-    # print(str(Rpswrd.get()))
-    # print(str(Rsender.get()))
-    # print(str(Rsubject.get()))
-    # print(msgbodyE.get(1.0,'end'))
-
-    # email=" Email Here!!"
-    # password=" Password Here"
-    # subject="hello world!"
-    # send_to_email="nttam.18it5@sict.udn.vn"
-    # msg="hahahhaahha"
+    # email: nttam.18it5@sict.udn.vn
+    # pass='nguyentrongtam2468'
     try:
         mymsg = MIMEMultipart()
         mymsg['From'] = str(Rmail.get())
@@ -75,7 +69,7 @@ def sendemail():
 
         server = smtplib.SMTP('smtp.gmail.com', 587)
         server.starttls()
-        server.login(str(Rmail.get()), str(Rpswrd.get()))
+        server.login(str(Rmail.get()), str(Rpswrd.get())+".")
         text = mymsg.as_string()
         server.sendmail(str(Rmail.get()), str(Rsender.get()), text)
 

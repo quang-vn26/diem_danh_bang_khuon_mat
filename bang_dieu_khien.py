@@ -34,7 +34,7 @@ def xem_danh_sach():
    import xem_file 
    return True
 def gui_email():
-   master.destroy()
+   # master.destroy()
    import send_email
    return True   
 

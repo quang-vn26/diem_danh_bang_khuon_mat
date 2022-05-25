@@ -22,6 +22,9 @@ def getImagesWithID(path):
     return np.array(IDs), faces
 
 Ids, faces = getImagesWithID(path)
+# print(Ids)
+# print(faces)
+
 recognizer.train(faces, Ids)
 
 if not os.path.exists('HuanLuyen'):
